@@ -6,7 +6,7 @@ export function useStripe() {
 
     useEffect(() => {
         async function loadStripeAsync() {
-            const stripeInstance = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+            const stripeInstance = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUB_KEY!)
             setStripe(stripeInstance);
         }
 
@@ -30,7 +30,7 @@ export function useStripe() {
 
             const data = await response.json();
 
-            await stripe.redirectToCheckout({sessionId: data.id});
+            await stripe.redirectToCheckout({sessionId: data.sessionId});
 
         } catch (error) {
             console.error("Error creating checkout session:", error);
@@ -54,7 +54,7 @@ export function useStripe() {
 
             const data = await response.json();
 
-            await stripe.redirectToCheckout({sessionId: data.id});
+            await stripe.redirectToCheckout({sessionId: data.sessionId});
 
         } catch (error) {
             console.error("Error creating checkout session:", error);
